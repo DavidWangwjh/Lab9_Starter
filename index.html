@@ -87,6 +87,14 @@
     </section>
   </main>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "2c79436b32e848cd8b97dc30441eda79"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                        
   <script>
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
@@ -102,6 +110,112 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    let log = errorBtns[0];
+    log.addEventListener('click', () => {
+      console.log("console log demo");
+    });
+
+    let error = errorBtns[1];
+    error.addEventListener('click', () => {
+      console.error("console error demo");
+    });
+
+    let count = errorBtns[2];
+    count.addEventListener('click', () => {
+      console.count("console count demo");
+    });
+
+    let warn = errorBtns[3];
+    warn.addEventListener('click', () => {
+      console.warn("console warn demo");
+    });
+
+    let assert = errorBtns[4];
+    assert.addEventListener('click', () => {
+      console.assert(false, "console assert demo");
+    });
+
+    let clear = errorBtns[5];
+    clear.addEventListener('click', () => {
+      console.countReset('console clear demo');
+      console.clear();
+    });
+
+    let dir = errorBtns[6];
+    dir.addEventListener('click', () => {
+      console.dir(errorBtns);
+    });
+
+    let dirxml = errorBtns[7];
+    dirxml.addEventListener('click', () => {
+      console.dirxml(errorBtns);
+    });
+
+    let start = errorBtns[8];
+    start.addEventListener('click', () => {
+      console.group("console group demo");
+    });
+
+    let end = errorBtns[9];
+    end.addEventListener('click', () => {
+      console.groupEnd();
+    });
+
+    let table = errorBtns[10];
+    table.addEventListener('click', () => {
+      console.table([{name: "David", age: 21}, {name: "John", age: 20}, {name: "Kevin", age: 19}]);
+    });
+
+    let startTimer = errorBtns[11];
+    startTimer.addEventListener('click', () => {
+      console.time('console time demo');
+    });
+
+    let endTimer = errorBtns[12];
+    endTimer.addEventListener('click', () => {
+      console.timeEnd('console time demo');
+    });
+
+    let trace = errorBtns[13];
+    function first () {
+      second();
+    }
+    function second () {
+      third();
+    }
+    function third () {
+      console.trace();
+    }
+    trace.addEventListener('click', () => {
+      first();
+    });
+
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "CustomError";
+      }
+    }
+
+    function errorFunction() {
+      throw new CustomError("custom error occurred");
+    }
+
+    let trigger = errorBtns[14];
+    trigger.addEventListener('click', () => {
+      try {
+        errorFunction();
+      } catch (err) {
+        if (err instanceof CustomError) {
+          alert("custom error");
+          console.log('error occurred');
+        } else {
+          throw err;
+        }
+      } finally {
+        console.log("finally");
+      }
+    });
   </script>
 </body>
 
